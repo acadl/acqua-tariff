@@ -13,9 +13,12 @@ public class TabelaTarifariaService {
 
     @Autowired
     private TabelaTarifariaRepository tabelaTarifariaRepository;
+    
+    @Autowired
+    private FaixaConsumoValidator faixaConsumoValidator;
 
     public List<TabelaTarifaria> obterLista() {
-        return tabelaTarifariaRepository.findAll();
+        return tabelaTarifariaRepository.findByAtivoTrue();
     }
 
     public TabelaTarifaria incluir(TabelaTarifaria tabelaTarifaria) {
@@ -28,12 +31,19 @@ public class TabelaTarifariaService {
             for (FaixaConsumo faixa : categoria.getFaixas()) {
                 faixa.setTabelaCategoria(categoria);
             }
+            
+         // Valida as faixas de cada categoria (impede sobreposição) antes de salvar
+            faixaConsumoValidator.validar(categoria.getFaixas());
         }
 
         return tabelaTarifariaRepository.save(tabelaTarifaria);
     }
 
     public void excluir(Integer id) {
-        tabelaTarifariaRepository.deleteById(id);
+        TabelaTarifaria tabela = tabelaTarifariaRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Tabela não encontrada com id: " + id));
+
+        tabela.setAtivo(false);
+        tabelaTarifariaRepository.save(tabela);
     }
 }

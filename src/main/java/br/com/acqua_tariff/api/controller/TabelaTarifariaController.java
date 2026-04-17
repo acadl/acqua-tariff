@@ -30,9 +30,9 @@ public class TabelaTarifariaController {
     }
 
     // DELETE /api/tabelas-tarifarias/{id}
-    // @DeleteMapping("/{id}")
-    // public ResponseEntity<Void> excluir(@PathVariable Integer id) {
-        // tabelaTarifariaService.excluir(id);
-        // return ResponseEntity.noContent().build();
-    // }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Integer id) {
+        tabelaTarifariaService.excluir(id);
+        return ResponseEntity.noContent().build();
+    }
 }
