@@ -1,39 +1,38 @@
 package br.com.acqua_tariff.api.controller;
 
-import java.time.LocalDate;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import br.com.acqua_tariff.api.model.domain.TabelaTarifaria;
-import br.com.acqua_tariff.api.model.repository.TabelaTarifariaRepository;
+import br.com.acqua_tariff.api.model.service.TabelaTarifariaService;
 
 @RestController
+@RequestMapping("/api/tabelas-tarifarias")
 public class TabelaTarifariaController {
-	
-	@Autowired
-	private TabelaTarifariaRepository tabelaTarifariaRepository;
-	
-	@GetMapping("/api/tabelas-tarifas")
-	public String criarTabelaTarifariaCompleta(){
-		
-		
-		TabelaTarifaria tabelaTarifaria = new TabelaTarifaria();
-		
-		tabelaTarifaria.setId(1);
-		tabelaTarifaria.setNome("Primeira tabela!");
-		tabelaTarifaria.setVigencia(LocalDate.of(2024, 1, 15));
-	    
-		tabelaTarifariaRepository.save(tabelaTarifaria);
-	    
-		
-        return "Chamou o método criar tabela";
-    }
-	
-	@GetMapping("/api/listar-tabelas-tarifarias")
-	public String listarTabelasTarifarias() {
-        return "Chamou o método listar tabela";
+
+    @Autowired
+    private TabelaTarifariaService tabelaTarifariaService;
+
+    // POST /api/tabelas-tarifarias
+    @PostMapping
+    public ResponseEntity<TabelaTarifaria> incluir(@RequestBody TabelaTarifaria tabelaTarifaria) {
+        TabelaTarifaria salva = tabelaTarifariaService.incluir(tabelaTarifaria);
+        return ResponseEntity.status(HttpStatus.CREATED).body(salva);
     }
 
+    // GET /api/tabelas-tarifarias
+    @GetMapping
+    public ResponseEntity<List<TabelaTarifaria>> obterLista() {
+        List<TabelaTarifaria> lista = tabelaTarifariaService.obterLista();
+        return ResponseEntity.ok(lista);
+    }
+
+    // DELETE /api/tabelas-tarifarias/{id}
+    // @DeleteMapping("/{id}")
+    // public ResponseEntity<Void> excluir(@PathVariable Integer id) {
+        // tabelaTarifariaService.excluir(id);
+        // return ResponseEntity.noContent().build();
+    // }
 }
