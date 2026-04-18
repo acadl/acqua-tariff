@@ -2,7 +2,9 @@ package br.com.acqua_tariff.api.model.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.acqua_tariff.api.model.domain.FaixaConsumo;
@@ -32,12 +34,18 @@ public class CalculoService {
             .findFirst()
             .orElseThrow(() -> new RuntimeException("Categoria não encontrada: " + request.getCategoria()));
 
+        // Ordena as faixas pelo inicio antes de calcular
+        List<FaixaConsumo> faixasOrdenadas = categoriaEncontrada.getFaixas()
+            .stream()
+            .sorted(Comparator.comparing(FaixaConsumo::getInicio))
+            .collect(Collectors.toList());
+
         // Faz o cálculo progressivo
         List<DetalhamentoDTO> detalhamento = new ArrayList<>();
         BigDecimal valorTotal = BigDecimal.ZERO;
         int consumoRestante = request.getConsumo();
 
-        for (FaixaConsumo faixa : categoriaEncontrada.getFaixas()) {
+        for (FaixaConsumo faixa : faixasOrdenadas) {
             if (consumoRestante <= 0) break;
 
             int inicioFaixa = faixa.getInicio();

@@ -11,6 +11,7 @@ API REST desenvolvida em Java com Spring Boot para gerenciamento e cálculo de t
 - **Banco de Dados:** PostgreSQL
 - **ORM:** Hibernate / JPA
 - **Build:** Maven
+- **IDE:** Eclipse
 
 ---
 
@@ -18,7 +19,7 @@ API REST desenvolvida em Java com Spring Boot para gerenciamento e cálculo de t
 
 - Java 21+
 - Maven 3.8+
-- PostgreSQL 14+
+- PostgreSQL 18+
 
 ---
 
@@ -45,7 +46,7 @@ Ou, se preferir, execute manualmente o script disponível em `sql/schema.sql`.
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/acqua-tariff.git
+git clone https://github.com/acadl/acqua-tariff.git
 cd acqua-tariff
 ```
 
@@ -55,10 +56,10 @@ cd acqua-tariff
 spring.application.name=acqua-tariff
 
 # PostgreSQL
-spring.datasource.url=jdbc:postgresql://localhost:5432/aquatariff
+spring.datasource.url=jdbc:postgresql://localhost:5432/NOME_BANCO_AQUI
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.datasource.username=postgres
-spring.datasource.password=sua_senha
+spring.datasource.password=SENHA_AQUI
 
 # JPA
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
@@ -67,14 +68,31 @@ spring.jpa.show-sql=true
 spring.jpa.open-in-view=false
 ```
 
-3. Execute a aplicação:
 
-```bash
-mvn spring-boot:run
-```
+3. Como abrir e executar no Eclipse:
 
-A aplicação estará disponível em `http://localhost:8080`.
+1. Abra o Eclipse
+2. Vá em **File** → **Import** → **Maven** → **Existing Maven Projects** e clique em **Next**
+3. Clique em **Browse**, navegue até o diretório onde está o arquivo `pom.xml` do projeto e clique em **Finish**
+4. Aguarde o Eclipse carregar e baixar todas as dependências do projeto automaticamente
+5. Clique com o botão direito na raiz do projeto → **Run As** → **Maven Build**
+   - No campo **Goals** digite: `clean install`
+   - Clique em **Run**
+   - Aguarde a mensagem `BUILD SUCCESS` no console
 
+   ![Selecione um projeto Maven existente](./assets/images/select_maven.png)
+
+   ![Mensagem de sucesso do Maven Build](./assets/images/build_succes.png)
+
+6. Clique com o botão direito na raiz do projeto → **Run As** → **Java Application**
+7. Aguarde a mensagem no console:
+   ```
+   Started ApiApplication in X seconds
+   ```
+ 
+8. A aplicação estará disponível em `http://localhost:8080`
+> ⚠️ **Importante:** Ao iniciar a aplicação pela primeira vez, o Hibernate criará automaticamente todas as tabelas necessárias no banco de dados PostgreSQL configurado no `application.properties`.
+ 
 ---
 
 ## 📁 Estrutura do Projeto
