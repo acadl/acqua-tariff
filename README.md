@@ -71,29 +71,31 @@ spring.jpa.open-in-view=false
 
 3. Como abrir e executar no Eclipse:
 
-1. Abra o Eclipse
-2. Vá em **File** → **Import** → **Maven** → **Existing Maven Projects** e clique em **Next**
-3. Clique em **Browse**, navegue até o diretório onde está o arquivo `pom.xml` do projeto e clique em **Finish**
-4. Aguarde o Eclipse carregar e baixar todas as dependências do projeto automaticamente
-5. Clique com o botão direito na raiz do projeto → **Run As** → **Maven Build**
-   - No campo **Goals** digite: `clean install`
-   - Clique em **Run**
-   - Aguarde a mensagem `BUILD SUCCESS` no console
+  1. Abra o Eclipse
+  2. Vá em **File** → **Import** → **Maven** → **Existing Maven Projects** e clique em **Next**
+  3. Clique em **Browse**, navegue até o diretório onde está o arquivo `pom.xml` do projeto e clique em **Finish**
+  4. Aguarde o Eclipse carregar e baixar todas as dependências do projeto automaticamente
+  5. Clique com o botão direito na raiz do projeto → **Run As** → **Maven Build**
+    - No campo **Goals** digite: `clean install`
+    - Clique em **Run**
+    - Aguarde a mensagem `BUILD SUCCESS` no console
 
-   ![Selecione um projeto Maven existente](./assets/images/select_maven.png)
-   *Figura 1: Selecione projetos Maven existentes*
+    ![Selecione um projeto Maven existente](./assets/images/select_maven.png)
 
-   ![Mensagem de sucesso do Maven Build](./assets/images/build_succes.png)
-   *Figura 2: Mensagem de sucesso após o Maven Build*
+    *Figura 1: Selecione projetos Maven existentes*
 
-6. Clique com o botão direito na raiz do projeto → **Run As** → **Java Application**
-7. Aguarde a mensagem no console:
-   ```
-   Started ApiApplication in X seconds
-   ```
- 
-8. A aplicação estará disponível em `http://localhost:8080`
-> ⚠️ **Importante:** Ao iniciar a aplicação pela primeira vez, o Hibernate criará automaticamente todas as tabelas necessárias no banco de dados PostgreSQL configurado no `application.properties`.
+    ![Mensagem de sucesso do Maven Build](./assets/images/build_succes.png)
+
+    *Figura 2: Mensagem de sucesso após o Maven Build*
+
+  6. Clique com o botão direito na raiz do projeto → **Run As** → **Java Application**
+  7. Aguarde a mensagem no console:
+    ```
+    Started ApiApplication in X seconds
+    ```
+  
+  8. A aplicação estará disponível em `http://localhost:8080`
+  > ⚠️ **Importante:** Ao iniciar a aplicação pela primeira vez, o Hibernate criará automaticamente todas as tabelas necessárias no banco de dados PostgreSQL configurado no `application.properties`.
  
 ---
 
@@ -131,6 +133,7 @@ src/main/java/br/com/acqua_tariff/api/
 O sistema é composto por 3 tabelas relacionadas:
 
 ![Modelagem das tabelas](./assets/images/modelagem.png)
+
 *Figura 3: Relacionamento das tabelas*
 
 ```
@@ -313,6 +316,8 @@ Exemplo com INDUSTRIAL, 18m³:
 
 
 Alterações no valor unitário realizadas no banco de dados são automaticamente refletidas nas requisições seguintes. 
+
+
 ---
 
 ## 🗃️ Scripts de Banco de Dados
