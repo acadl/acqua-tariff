@@ -81,8 +81,10 @@ spring.jpa.open-in-view=false
    - Aguarde a mensagem `BUILD SUCCESS` no console
 
    ![Selecione um projeto Maven existente](./assets/images/select_maven.png)
+   *Figura 1: Selecione projetos Maven existentes*
 
    ![Mensagem de sucesso do Maven Build](./assets/images/build_succes.png)
+   *Figura 2: Mensagem de sucesso após o Maven Build*
 
 6. Clique com o botão direito na raiz do projeto → **Run As** → **Java Application**
 7. Aguarde a mensagem no console:
@@ -101,6 +103,7 @@ spring.jpa.open-in-view=false
 src/main/java/br/com/acqua_tariff/api/
 ├── controller/
 │   ├── TabelaTarifariaController.java
+│   ├── GlobalExceptionHandler.java
 │   └── CalculoController.java
 ├── model/
 │   ├── domain/
@@ -118,6 +121,7 @@ src/main/java/br/com/acqua_tariff/api/
 │   └── service/
 │       ├── TabelaTarifariaService.java
 │       └── CalculoService.java
+│       └── FaixaConsumoValidator.java
 ```
 
 ---
@@ -125,6 +129,9 @@ src/main/java/br/com/acqua_tariff/api/
 ## 🗄️ Modelagem de Dados
 
 O sistema é composto por 3 tabelas relacionadas:
+
+![Modelagem das tabelas](./assets/images/modelagem.png)
+*Figura 3: Relacionamento das tabelas*
 
 ```
 tabela_tarifaria
@@ -304,6 +311,8 @@ Exemplo com INDUSTRIAL, 18m³:
 | 11 a 20m³ | 8 | R$ 2,00 | R$ 16,00 |
 | **Total** | **18** | | **R$ 26,00** |
 
+
+Alterações no valor unitário realizadas no banco de dados são automaticamente refletidas nas requisições seguintes. 
 ---
 
 ## 🗃️ Scripts de Banco de Dados
@@ -328,6 +337,6 @@ Os scripts estão disponíveis na pasta `sql/`:
 
 ## 📌 Observações
 
-- Tabelas excluídas via DELETE não são removidas fisicamente do banco, apenas marcadas como inativas (`ativo = false`), impedindo seu uso em cálculos futuros.
+- Tabelas excluídas via DELETE não são removidas fisicamente do banco (SOFT DELETE), apenas marcadas como inativas (`ativo = false`), impedindo seu uso em cálculos futuros.
 - Alterações nos valores das faixas no banco de dados refletem automaticamente nos cálculos, sem necessidade de alteração de código.
 - As faixas devem iniciar em 0m³ e cobrir qualquer volume de consumo informado.
