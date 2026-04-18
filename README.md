@@ -71,31 +71,31 @@ spring.jpa.open-in-view=false
 
 3. Como abrir e executar no Eclipse:
 
-  1. Abra o Eclipse
-  2. Vá em **File** → **Import** → **Maven** → **Existing Maven Projects** e clique em **Next**
-  3. Clique em **Browse**, navegue até o diretório onde está o arquivo `pom.xml` do projeto e clique em **Finish**
-  4. Aguarde o Eclipse carregar e baixar todas as dependências do projeto automaticamente
-  5. Clique com o botão direito na raiz do projeto → **Run As** → **Maven Build**
-    - No campo **Goals** digite: `clean install`
-    - Clique em **Run**
-    - Aguarde a mensagem `BUILD SUCCESS` no console
+3.1. Abra o Eclipse
+3.2. Vá em **File** → **Import** → **Maven** → **Existing Maven Projects** e clique em **Next**
+3.3. Clique em **Browse**, navegue até o diretório onde está o arquivo `pom.xml` do projeto e clique em **Finish**
+3.4. Aguarde o Eclipse carregar e baixar todas as dependências do projeto automaticamente
+3.5. Clique com o botão direito na raiz do projeto → **Run As** → **Maven Build**
+  - No campo **Goals** digite: `clean install`
+  - Clique em **Run**
+  - Aguarde a mensagem `BUILD SUCCESS` no console
 
-    ![Selecione um projeto Maven existente](./assets/images/select_maven.png)
+  ![Selecione um projeto Maven existente](./assets/images/select_maven.png)
 
-    *Figura 1: Selecione projetos Maven existentes*
+  *Figura 1: Selecione projetos Maven existentes*
 
-    ![Mensagem de sucesso do Maven Build](./assets/images/build_succes.png)
+  ![Mensagem de sucesso do Maven Build](./assets/images/build_succes.png)
 
-    *Figura 2: Mensagem de sucesso após o Maven Build*
+  *Figura 2: Mensagem de sucesso após o Maven Build*
 
-  6. Clique com o botão direito na raiz do projeto → **Run As** → **Java Application**
-  7. Aguarde a mensagem no console:
-    ```
-    Started ApiApplication in X seconds
-    ```
-  
-  8. A aplicação estará disponível em `http://localhost:8080`
-  > ⚠️ **Importante:** Ao iniciar a aplicação pela primeira vez, o Hibernate criará automaticamente todas as tabelas necessárias no banco de dados PostgreSQL configurado no `application.properties`.
+3.6. Clique com o botão direito na raiz do projeto → **Run As** → **Java Application**
+3.7. Aguarde a mensagem no console:
+  ```
+  Started ApiApplication in X seconds
+  ```
+
+3.8. A aplicação estará disponível em `http://localhost:8080`
+> ⚠️ **Importante:** Ao iniciar a aplicação pela primeira vez, o Hibernate criará automaticamente todas as tabelas necessárias no banco de dados PostgreSQL configurado no `application.properties`.
  
 ---
 
